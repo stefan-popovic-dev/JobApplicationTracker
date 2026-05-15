@@ -3,6 +3,9 @@ package dev.popovic.stefan.jobapplicationtracker.controller;
 import dev.popovic.stefan.jobapplicationtracker.dto.contact.ContactResponse;
 import dev.popovic.stefan.jobapplicationtracker.dto.contact.CreateContactRequest;
 import dev.popovic.stefan.jobapplicationtracker.service.ContactService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,10 +20,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/applications/{appId}/contacts")
 @RequiredArgsConstructor
+@Tag(name = "Contacts")
+@SecurityRequirement(name = "bearerAuth")
 public class ContactController {
 
     private final ContactService contactService;
 
+    @Operation(summary = "List all contacts for a job application")
     @GetMapping
     public ResponseEntity<List<ContactResponse>> getAll(
             @PathVariable UUID appId,
@@ -28,6 +34,7 @@ public class ContactController {
         return ResponseEntity.ok(contactService.getAllForApplication(appId, principal.getUsername()));
     }
 
+    @Operation(summary = "Add a contact to a job application")
     @PostMapping
     public ResponseEntity<ContactResponse> create(
             @PathVariable UUID appId,
@@ -37,6 +44,7 @@ public class ContactController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Operation(summary = "Delete a contact from a job application")
     @DeleteMapping("/{contactId}")
     public ResponseEntity<Void> delete(
             @PathVariable UUID appId,
