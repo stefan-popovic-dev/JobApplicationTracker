@@ -1,4 +1,4 @@
-![CI](https://github.com/YOUR_USERNAME/JobApplicationTracker/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/stefan-popovic-dev/JobApplicationTracker/actions/workflows/ci.yml/badge.svg)
 
 # Job Application Tracker
 
