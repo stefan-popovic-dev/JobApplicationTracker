@@ -10,3 +10,7 @@ app:
     secret: ${JWT_SECRET:dev-secret-minimum-32-characters-long-padding}
 openai:
   api-key: ${OPENAI_API_KEY:placeholder}
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method

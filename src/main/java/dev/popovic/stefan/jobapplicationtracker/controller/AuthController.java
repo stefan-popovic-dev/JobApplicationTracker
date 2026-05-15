@@ -6,6 +6,8 @@ import dev.popovic.stefan.jobapplicationtracker.dto.auth.RegisterRequest;
 import dev.popovic.stefan.jobapplicationtracker.entity.AppUser;
 import dev.popovic.stefan.jobapplicationtracker.repository.AppUserRepository;
 import dev.popovic.stefan.jobapplicationtracker.security.JwtUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Tag(name = "Authentication")
 public class AuthController {
 
     private final AppUserRepository appUserRepository;
@@ -32,6 +35,7 @@ public class AuthController {
     private final UserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
 
+    @Operation(summary = "Register a new user account")
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
         if (appUserRepository.findByEmail(request.email()).isPresent()) {
@@ -48,6 +52,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(jwtUtil.generateToken(userDetails)));
     }
 
+    @Operation(summary = "Authenticate and receive a JWT token")
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         authenticationManager.authenticate(
