@@ -51,7 +51,7 @@ A portfolio-grade REST API for tracking job applications, built to demonstrate p
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/JobApplicationTracker.git
+git clone https://github.com/stefan-popovic-dev/JobApplicationTracker.git
 cd JobApplicationTracker
 
 # 2. Set your OpenAI API key
