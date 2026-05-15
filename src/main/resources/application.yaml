@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: JobApplicationTracker
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create-drop    
+openai:
+  api-key: ${OPENAI_API_KEY:placeholder}
